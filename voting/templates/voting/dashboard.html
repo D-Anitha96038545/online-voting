@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'voting/css/style.css' %}">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <h2>Voter Dashboard</h2>
+
+    <a href="{% url 'add_voter' %}" class="add-btn">+ Add Voter</a>
+
+    <!-- Messages (only current request messages) -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <table class="dashboard-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Voter ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Voted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for voter in voters %}
+            <tr>
+                <td data-label="#"> {{ forloop.counter }} </td>
+                <td data-label="Voter ID"> {{ voter.voter_id }} </td>
+                <td data-label="Name"> {{ voter.name }} </td>
+                <td data-label="Age"> {{ voter.age }} </td>
+
+                <td data-label="Voted">
+                    {% if voter.has_voted %}
+                        <span class="badge voted">Yes</span>
+                    {% else %}
+                        <span class="badge not-voted">No</span>
+                    {% endif %}
+                </td>
+
+                <td data-label="Actions">
+                    <div class="action-buttons">
+                        <a href="{% url 'edit_voter' voter.id %}" class="btn edit">Edit</a>
+                        <a href="{% url 'delete_voter' voter.id %}" class="btn delete"
+                           onclick="return confirm('Are you sure you want to delete this voter?');">
+                           Delete
+                        </a>
+                        <a href="{% url 'vote' voter.id %}" class="btn vote">Vote</a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="empty">No voters found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

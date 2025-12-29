@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Voting System</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'voting/css/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Online Voting System</h1>
+
+    <div class="btn-group">
+        <a href="{% url 'register' %}">
+            <button class="btn register-btn">Register</button>
+        </a>
+        <a href="{% url 'login' %}">
+            <button class="btn login-btn">Login</button>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

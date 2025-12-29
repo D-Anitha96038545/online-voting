@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'voting/css/style.css' %}">
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Register</h2>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if 'register' in message.tags %}
+            <div class="alert error">{{ message }}</div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Username</label>
+        <input type="text" name="username" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" name="confirm" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

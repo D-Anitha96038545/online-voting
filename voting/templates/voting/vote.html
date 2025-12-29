@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vote</title>
+    <link rel="stylesheet" href="{% static 'voting/css/style.css' %}">
+</head>
+<body>
+
+<div class="vote-container">
+    <h2>Vote for {{ voter.name }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <button type="submit" name="party" value="TDP" class="party-btn tdp">
+            TDP
+        </button>
+
+        <button type="submit" name="party" value="YSRCP" class="party-btn ysrcp">
+            YSRCP
+        </button>
+
+        <button type="submit" name="party" value="BJP" class="party-btn bjp">
+            BJP
+        </button>
+
+        <button type="submit" name="party" value="CONGRESS" class="party-btn congress">
+            CONGRESS
+        </button>
+    </form>
+</div>
+
+</body>
+</html>
